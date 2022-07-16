@@ -1,6 +1,6 @@
 app:
   loadUser: true
-  totalOrdersCount: 20000
+  totalOrdersCount: 2000
 debug: false
 
 server:
@@ -13,7 +13,7 @@ spring:
     password: welcome
   jpa:
     generate-ddl: true
-    show-sql: false
+    show-sql: true
     properties:
       hibernate:
         format_sql: false
