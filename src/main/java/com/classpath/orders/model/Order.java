@@ -13,6 +13,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.PastOrPresent;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -35,10 +41,21 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
+	
+	@NotEmpty(message="customer name cannot be blank")
 	private String customerName;
+	
+	@NotBlank(message = "customer email cannot be blank")
+	@Email(message = "customer email is not in correct format")
 	private String customerEmail;
+	
+	@Min(value = 1000, message = "min order price should be 1000")
+	@Max(value=20000, message = "max order price cannot be more than 20000")
 	private double orderPrice;
+	
+	@PastOrPresent(message="order date cannot be in future")
 	private LocalDate orderDate;
+	
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonManagedReference
 	private Set<LineItem> lineItems;
