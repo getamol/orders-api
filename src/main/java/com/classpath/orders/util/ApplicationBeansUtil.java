@@ -1,6 +1,7 @@
 package com.classpath.orders.util;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import static java.util.stream.Stream.of;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
@@ -19,12 +20,12 @@ public class ApplicationBeansUtil implements CommandLineRunner{
 		
 		String[] beanNames = this.applicationContext.getBeanDefinitionNames();
 		
-		for(String beanName: beanNames) {
-			System.out.println("Bean name:: "+ beanName);
-		}
-		
+		//imperative style of coding
+		/*
+		 * for(String beanName: beanNames) { System.out.println("Bean name:: "+
+		 * beanName); }
+		 */
+		//declarative style of coding
+		of(beanNames).forEach(System.out::println);
 	}
-	
-	
-
 }
