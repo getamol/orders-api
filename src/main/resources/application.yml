@@ -13,6 +13,7 @@ spring:
   jpa:
     generate-ddl: true
     show-sql: true
-    hibernate:
-      properties:
-        format_sql: true 
+    properties:
+      hibernate:
+        format_sql: true
+      
