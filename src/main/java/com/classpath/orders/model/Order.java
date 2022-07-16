@@ -1,6 +1,8 @@
 package com.classpath.orders.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -40,4 +42,12 @@ public class Order {
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonManagedReference
 	private Set<LineItem> lineItems;
+	
+	public void addLineItem(LineItem lineItem) {
+		if (Objects.isNull(lineItems)) {
+			this.lineItems = new HashSet<>();
+		}
+		this.lineItems.add(lineItem);
+		lineItem.setOrder(this);
+	}
 }

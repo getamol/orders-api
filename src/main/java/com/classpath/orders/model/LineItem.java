@@ -34,6 +34,7 @@ public class LineItem {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
+	private int qty;
 	private double price;
 	
 	@ManyToOne
