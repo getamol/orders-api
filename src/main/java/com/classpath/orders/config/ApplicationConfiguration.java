@@ -41,11 +41,7 @@ public class ApplicationConfiguration {
 	User userBasedOnJava8() {
 		return new User();
 	}
-	
-	
 }
-
-
 class User {
 	
 }
