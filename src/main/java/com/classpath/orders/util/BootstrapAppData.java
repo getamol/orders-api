@@ -55,8 +55,7 @@ public class BootstrapAppData implements ApplicationListener<ApplicationReadyEve
 												.getLineItems()
 												.stream()
 												.map(lineItem -> lineItem.getQty() * lineItem.getPrice())
-												.reduce((price1, price2) -> price1 + price2)
-												.orElse(0d);
+												.reduce(0d, Double::sum);
 					order.setOrderPrice(totalOrderPrice);
 					//insert Order into Orders table
 					this.orderRepository.save(order);
