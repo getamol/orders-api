@@ -8,8 +8,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApplicationBeansUtil implements CommandLineRunner{
 
-	@Autowired
-	private ApplicationContext applicationContext;
+	private final ApplicationContext applicationContext;
+
+	public ApplicationBeansUtil(ApplicationContext applicationContext) {
+		this.applicationContext = applicationContext;
+	}
 	
 	@Override
 	public void run(String... args) throws Exception {
