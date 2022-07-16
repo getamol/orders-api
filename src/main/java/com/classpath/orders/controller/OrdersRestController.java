@@ -36,6 +36,19 @@ public class OrdersRestController {
 		return this.orderService.fetchOrderById(id);
 	}
 	
+	@GetMapping("/price")
+	public Set<Order> fetchOrderByPrice(
+			@RequestParam(name = "min", required = false, defaultValue = "5000") double min,
+			@RequestParam(name = "max", required = false, defaultValue = "5500") double max
+			) {
+		return this.orderService.fetchOrderByPriceRange(min, max);
+	}
+	
+	@GetMapping("/name/{productName}")
+	public Set<Order> fetchOrderByPrice(@PathVariable("productName") String productName) {
+		return this.orderService.fetchOrderByProductName(productName);
+	}
+	
 	@PostMapping
 	public Order saveOrder(@RequestBody Order order) {
 		return this.orderService.saveOrder(order);

@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
+import com.classpath.orders.dto.OrderDto;
 import com.classpath.orders.model.Order;
 import com.classpath.orders.repository.OrderRepository;
 
@@ -40,7 +41,7 @@ public class OrderService {
 		Sort.Direction direction = strDirection.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
 		
 		PageRequest pageRequest = PageRequest.of(page, size, direction, property);
-		Page<Order> pageResponse = this.orderRepository.findAll(pageRequest);
+		Page<OrderDto> pageResponse = this.orderRepository.findBy(pageRequest);
 		
 		Map<String, Object> response =  new LinkedHashMap<>();
 		response.put("total", pageResponse.getTotalElements());
@@ -54,6 +55,17 @@ public class OrderService {
 	public Order fetchOrderById(long orderId) {
 		return this.orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("invalid order id"));
 	}
+	
+	
+	public Set<Order> fetchOrderByPriceRange(double min, double max) {
+		return this.orderRepository.findByOrderPriceBetween(min, max);
+	}
+	
+	public Set<Order> fetchOrderByProductName(String productName) {
+		return this.orderRepository.findByLineItems_Name(productName);
+	}
+	
+	
 	
 	public void deleteOrderById(long orderId) {
 		this.orderRepository.deleteById(orderId);
