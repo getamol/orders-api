@@ -32,7 +32,7 @@ public class BootstrapAppData implements ApplicationListener<ApplicationReadyEve
 	@Override
 	public void onApplicationEvent(ApplicationReadyEvent event) {
 		log.info("Bootstrapping application data with Orders ");
-		IntStream.range(0, )
+		IntStream.range(0, totalOrdersCount)
 				.forEach(index -> {
 					String customerName = faker.name().firstName();
 					Order order = Order
