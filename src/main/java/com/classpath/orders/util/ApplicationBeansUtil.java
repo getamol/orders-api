@@ -1,7 +1,6 @@
 package com.classpath.orders.util;
 
 import static java.util.stream.Stream.of;
-
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +25,6 @@ public class ApplicationBeansUtil implements CommandLineRunner{
 		 * beanName); }
 		 */
 		//declarative style of coding
-		of(beanNames).forEach(System.out::println);
+		of(beanNames).filter(bean -> bean.startsWith("user")).forEach(System.out::println);
 	}
 }
