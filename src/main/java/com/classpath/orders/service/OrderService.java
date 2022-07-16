@@ -2,6 +2,7 @@ package com.classpath.orders.service;
 
 import java.util.Set;
 
+import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
 import com.classpath.orders.model.Order;
@@ -20,8 +21,10 @@ public class OrderService {
 		return this.orderRepository.save(order);
 	}
 	
-	public Iterable<Order> fetchAllOrders() {
-		return this.orderRepository.findAll();
+	public Set<Order> fetchAllOrders() {
+	
+		Iterable<Order> orderId = this.orderRepository.findAll();
+		return Streamable.of(orderId).toSet();
 	}
 	
 	public Order fetchOrderById(long orderId) {
