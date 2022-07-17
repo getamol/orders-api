@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import com.classpath.orders.model.Order;
 import com.classpath.orders.service.OrderService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -27,6 +30,16 @@ public class OrdersRestController {
 	private final OrderService orderService;
 
 	@GetMapping
+	@Operation(
+			method = "fetch all order",
+			description = "API to fetch all the orders in pagination form")
+		
+	@ApiResponses({
+		@ApiResponse(responseCode = "200", description = "successfull response for fetching orders"),
+		@ApiResponse(responseCode = "401", description = "unauthorized api access"),
+		@ApiResponse(responseCode = "403", description = "forbidden"),
+	})
+	
 	public Map<String, Object> fetchAllOrder(
 			@RequestParam(name = "page", required = false, defaultValue = "0") int page,
 			@RequestParam(name = "size", required = false, defaultValue = "10") int size,
