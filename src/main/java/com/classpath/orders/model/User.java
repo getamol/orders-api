@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,7 +19,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @NoArgsConstructor
@@ -26,6 +29,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Entity
 @Table(name="users")
+@ToString(exclude = "roles")
+@EqualsAndHashCode(exclude = "roles")
 public class User {
 	
 	@Id
@@ -33,8 +38,7 @@ public class User {
 	private long id;
 	private String username;
 	private String password;
-	@ManyToMany(mappedBy = "users")
-	@JsonManagedReference
+	@ManyToMany(mappedBy = "users", fetch = FetchType.EAGER)
 	private Set<Role> roles;
 	
 	public void addRole(Role role) {
