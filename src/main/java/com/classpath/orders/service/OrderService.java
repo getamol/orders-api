@@ -22,9 +22,19 @@ public class OrderService {
 	
 	@Transactional
 	public Order saveOrder(Order order) {
-		return this.orderRepository.save(order);
+		if (validate(order)) {
+			return this.orderRepository.save(order);
+		}
+		return null;
 	}
 	
+	private boolean validate(Order order) {
+		if(order.getOrderPrice() > 4000) {
+			return true;
+		}
+		return false;
+	}
+
 	/**
 	 * Return the set of orders in the page
 	 * @param page - the page number 
