@@ -1,6 +1,6 @@
 app:
   loadUser: true
-  totalOrdersCount: 20000
+  totalOrdersCount: 200
 debug: false
 
 server:
