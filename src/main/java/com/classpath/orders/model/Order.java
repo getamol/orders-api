@@ -49,7 +49,6 @@ public class Order {
 	@Email(message = "customer email is not in correct format")
 	private String customerEmail;
 	
-	@Password
 	private String password;
 	
 	@Min(value = 1000, message = "min order price should be 1000")

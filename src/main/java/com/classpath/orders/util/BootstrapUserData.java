@@ -42,7 +42,12 @@ public class BootstrapUserData {
 		Role userRole = new Role("ROLE_USER");
 		Role adminRole = new Role("ROLE_ADMIN");
 		
-		
+
+		kiran.addRole(userRole);
+		vinay.addRole(userRole);
+		vinay.addRole(adminRole);
+		this.userRepository.save(kiran);
+		this.userRepository.save(vinay);
 		
 		kiran.addRole(userRole);
 		vinay.addRole(userRole);
@@ -50,9 +55,7 @@ public class BootstrapUserData {
 		
 		this.userRepository.save(kiran);
 		this.userRepository.save(vinay);
-		this.roleRepository.save(userRole);
-		this.roleRepository.save(adminRole);
-
+		
 	}
 
 }
