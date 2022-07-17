@@ -3,6 +3,7 @@ package com.classpath.orders.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GeneratorType;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,6 +34,7 @@ public class User {
 	private String username;
 	private String password;
 	@ManyToMany(mappedBy = "users")
+	@JsonManagedReference
 	private Set<Role> roles;
 	
 	public void addRole(Role role) {
