@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,6 +19,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.PastOrPresent;
 
+import com.classpath.orders.validator.Password;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AccessLevel;
@@ -48,6 +48,9 @@ public class Order {
 	@NotBlank(message = "customer email cannot be blank")
 	@Email(message = "customer email is not in correct format")
 	private String customerEmail;
+	
+	@Password
+	private String password;
 	
 	@Min(value = 1000, message = "min order price should be 1000")
 	@Max(value=20000, message = "max order price cannot be more than 20000")

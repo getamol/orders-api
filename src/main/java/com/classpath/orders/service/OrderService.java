@@ -3,17 +3,15 @@ package com.classpath.orders.service;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.classpath.orders.dto.OrderDto;
 import com.classpath.orders.model.Order;
 import com.classpath.orders.repository.OrderRepository;
-
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -22,7 +20,7 @@ public class OrderService {
 	
 	private final OrderRepository orderRepository;
 	
-	
+	@Transactional
 	public Order saveOrder(Order order) {
 		return this.orderRepository.save(order);
 	}
@@ -36,6 +34,7 @@ public class OrderService {
 	 * 
 	 * @return the response map
 	 */
+	@Transactional
 	public Map<String, Object> fetchAllOrders(int page, int size, String strDirection, String property) {
 		
 		Sort.Direction direction = strDirection.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
@@ -52,21 +51,23 @@ public class OrderService {
 		return response;
 	}
 	
+	@Transactional
 	public Order fetchOrderById(long orderId) {
 		return this.orderRepository.findById(orderId).orElseThrow(() -> new IllegalArgumentException("invalid order id"));
 	}
 	
-	
+	@Transactional
 	public Set<Order> fetchOrderByPriceRange(double min, double max) {
 		return this.orderRepository.findByOrderPriceBetween(min, max);
 	}
 	
+	@Transactional
 	public Set<Order> fetchOrderByProductName(String productName) {
 		return this.orderRepository.findByLineItems_Name(productName);
 	}
 	
 	
-	
+	@Transactional
 	public void deleteOrderById(long orderId) {
 		this.orderRepository.deleteById(orderId);
 	}

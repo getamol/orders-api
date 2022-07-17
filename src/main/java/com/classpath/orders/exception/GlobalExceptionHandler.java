@@ -35,9 +35,7 @@ public class GlobalExceptionHandler {
 				 .map(ObjectError::getDefaultMessage)
 				 .collect(Collectors.toSet());
 	}
-
 }
-
 
 @AllArgsConstructor
 @Getter
