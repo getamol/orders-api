@@ -29,8 +29,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @Table(name="users")
-@ToString(exclude = "roles")
-@EqualsAndHashCode(exclude = "roles")
 public class User {
 	
 	@Id

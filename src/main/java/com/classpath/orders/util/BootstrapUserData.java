@@ -26,17 +26,23 @@ public class BootstrapUserData {
 	public void insertUsers(ApplicationReadyEvent readyEvent) {
 		log.info("Inserting the users data ");
 		//User user = new User(12, 2, true, false, false, "Anand", "Raman");
-		User kiran = User.builder().username("kiran").password(passwordEncoder.encode("welcome")).build();
-		User vinay = User.builder().username("vinay").password(passwordEncoder.encode("welcome")).build();
+		
+		User kiran = new User();
+		kiran.setUsername("kiran");
+		kiran.setPassword(passwordEncoder.encode("welcome"));
+		
 
+		User vinay = new User();
+		vinay.setUsername("vinay");
+		vinay.setPassword(passwordEncoder.encode("welcome"));
+		
 		this.userRepository.save(kiran);
 		this.userRepository.save(vinay);
 
-		Role userRole = Role.builder().roleName("ROLE_USER").build();
-		Role adminRole = Role.builder().roleName("ROLE_ADMIN").build();
+		Role userRole = new Role("ROLE_USER");
+		Role adminRole = new Role("ROLE_ADMIN");
 		
-		this.roleRepository.save(userRole);
-		this.roleRepository.save(adminRole);
+		
 		
 		kiran.addRole(userRole);
 		vinay.addRole(userRole);

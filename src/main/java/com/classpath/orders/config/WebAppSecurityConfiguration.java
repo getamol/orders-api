@@ -34,10 +34,12 @@ public class WebAppSecurityConfiguration extends WebSecurityConfigurerAdapter{
 		httpSecurity.csrf().disable();
 		httpSecurity.headers().frameOptions().disable();
 		httpSecurity.authorizeRequests()
+					.antMatchers("/h2-console/**")
+						.permitAll()
 					.antMatchers(HttpMethod.GET, "/api/v1/orders**")
 						.hasAnyRole("USER", "ADMIN")
-					.antMatchers(HttpMethod.POST, "/api/v1/orders**")
-						.hasAnyRole("ADMIN")
+					.antMatchers(HttpMethod.POST, "/api/v1/orders/**")
+						.hasRole("ADMIN")
 					.antMatchers(HttpMethod.DELETE, "/api/v1/orders**")
 						.hasAnyRole("ADMIN")
 					.anyRequest()

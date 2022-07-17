@@ -22,6 +22,8 @@ public class DomainUserDetailsService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = this.userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("bad credentials"));
+		System.out.println("user from the db:: ");
+		System.out.println(user);
 		return new DomainUserDetails(user);
 	}
 

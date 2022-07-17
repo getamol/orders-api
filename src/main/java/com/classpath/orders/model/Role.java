@@ -11,9 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,7 +20,6 @@ import lombok.ToString;
 
 @Data
 @NoArgsConstructor
-@Builder
 @AllArgsConstructor
 @Entity
 @Table(name="roles")
@@ -35,6 +31,10 @@ public class Role {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String roleName;
+	
+	public Role(String roleName) {
+		this.roleName = roleName;
+	}
 	@ManyToMany
 	@JoinTable(
 			name="roles_users",
